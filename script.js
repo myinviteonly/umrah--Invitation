@@ -3,7 +3,8 @@
 /* ===============================================================
    EDIT YOUR INVITATION HERE
    Change the time, restaurant or photos later using this section.
-   No server, tracking, attendance list or database is involved.
+   RSVP replies are emailed to the hosts via the free FormSubmit.co service.
+   The owner must verify the destination inbox after the first test submission.
    =============================================================== */
 const INVITATION = {
   day: 'Saturday',
@@ -191,15 +192,85 @@ function popSparkles() {
   }
 }
 
-function confirmAttendance() {
+function updateAttendanceChoice() {
+  const attending = $('rsvpYes').checked;
+  $('rsvpCountRow').hidden = !attending;
+  $('rsvpCount').disabled = !attending;
+  $('rsvpCount').required = attending;
+}
+
+function openRsvpForm(attending = true) {
   if (rsvpDone) return;
-  rsvpDone = true;
-  $('rsvpButton').classList.add('is-confirmed');
-  $('rsvpButton').innerHTML = '♥ &nbsp; Insha’Allah, see you there! &nbsp; ✦';
-  $('rsvpButton').disabled = true;
-  $('rsvpResult').hidden = false;
-  popSparkles();
-  announce('Alhamdulillah! We look forward to seeing you, Insha’Allah.');
+  $('rsvpYes').checked = attending;
+  $('rsvpNo').checked = !attending;
+  updateAttendanceChoice();
+  $('rsvpFormPanel').hidden = false;
+  $('rsvpButton').setAttribute('aria-expanded', 'true');
+  $('rsvpStatus').hidden = true;
+  $('rsvpFormPanel').scrollIntoView({behavior: prefersLessMotion ? 'instant' : 'smooth', block: 'nearest'});
+  $('rsvpName').focus({preventScroll:true});
+}
+
+function closeRsvpForm() {
+  $('rsvpFormPanel').hidden = true;
+  $('rsvpButton').setAttribute('aria-expanded', 'false');
+  $('rsvpStatus').hidden = true;
+  $('rsvpButton').focus({preventScroll:true});
+}
+
+async function sendRsvp(event) {
+  event.preventDefault();
+  if (rsvpDone) return;
+  const form = $('rsvpForm');
+  if (!form.reportValidity()) return;
+  const submit = $('rsvpSendButton');
+  const feedback = $('rsvpStatus');
+  submit.disabled = true;
+  submit.textContent = 'Sending your reply…';
+  feedback.hidden = false;
+  feedback.classList.remove('is-error');
+  feedback.textContent = 'Sending your reply, just a moment…';
+
+  const attending = $('rsvpYes').checked;
+  const data = Object.fromEntries(new FormData(form).entries());
+  if (!attending) data.party_size = '0';
+  // No external JavaScript libraries, sign-in, or server are required.
+  // FormSubmit.co receives the response and forwards it to the hosts' inbox.
+  try {
+    const response = await fetch(form.action, {
+      method: 'POST',
+      headers: {'Content-Type': 'application/json', 'Accept': 'application/json'},
+      body: JSON.stringify(data)
+    });
+    if (!response.ok) throw new Error('RSVP submission failed');
+    const result = await response.json();
+    if (result.success !== true && result.success !== 'true') {
+      throw new Error(result.message || 'RSVP submission not accepted');
+    }
+
+    rsvpDone = true;
+    $('rsvpFormPanel').hidden = true;
+    $('rsvpButton').setAttribute('aria-expanded', 'false');
+    $('rsvpButton').classList.add('is-confirmed');
+    $('rsvpButton').disabled = true;
+    $('rsvpDeclineButton').hidden = true;
+    $('rsvpButton').innerHTML = '♥ &nbsp; Thank you for replying! &nbsp; ✦';
+    $('rsvpResultTitle').textContent = attending ? 'Alhamdulillah!' : 'JazakAllahu Khayran!';
+    $('rsvpResultMessage').textContent = attending
+      ? 'Your reply has been submitted. We look forward to celebrating together, Insha’Allah! 💛'
+      : 'Thank you for letting us know. You’ll be in our duas! 💛';
+    $('rsvpResult').hidden = false;
+    popSparkles();
+    announce('Thank you! Your RSVP has been submitted.');
+  } catch (error) {
+    feedback.hidden = false;
+    feedback.classList.add('is-error');
+    feedback.textContent = 'We couldn’t send your reply right now. Please try again in a moment.';
+    announce('Unable to send the reply. Please try again.');
+  } finally {
+    submit.disabled = false;
+    submit.innerHTML = 'Send my reply <span aria-hidden="true">✧</span>';
+  }
 }
 
 async function shareInvitation() {
@@ -234,7 +305,12 @@ function resetStory() {
   $('gratitudeNext').disabled = true;
   $('rsvpButton').classList.remove('is-confirmed');
   $('rsvpButton').disabled = false;
+  $('rsvpButton').setAttribute('aria-expanded','false');
   $('rsvpButton').innerHTML = '<span aria-hidden="true">♡</span> Insha’Allah, I’ll Be There! <span aria-hidden="true">✧</span>';
+  $('rsvpDeclineButton').hidden = false;
+  $('rsvpForm').reset();
+  $('rsvpFormPanel').hidden = true;
+  updateAttendanceChoice();
   $('rsvpResult').hidden = true;
   $('rsvpArea').querySelectorAll('.celebration-spark').forEach(el => el.remove());
   moveGallery(0);
@@ -252,7 +328,12 @@ function initialize() {
   $('journeyNext').addEventListener('click', () => showScene(3));
   $('galleryNextScene').addEventListener('click', () => showScene(4));
   $('skipToInvite').addEventListener('click', () => showScene(4));
-  $('rsvpButton').addEventListener('click', confirmAttendance);
+  $('rsvpButton').addEventListener('click', () => openRsvpForm(true));
+  $('rsvpDeclineButton').addEventListener('click', () => openRsvpForm(false));
+  $('rsvpYes').addEventListener('change', updateAttendanceChoice);
+  $('rsvpNo').addEventListener('change', updateAttendanceChoice);
+  $('rsvpCancelButton').addEventListener('click', closeRsvpForm);
+  $('rsvpForm').addEventListener('submit', sendRsvp);
   $('shareButton').addEventListener('click', shareInvitation);
   $('startOver').addEventListener('click', resetStory);
   $('brandHome').addEventListener('click', event => { event.preventDefault(); resetStory(); });

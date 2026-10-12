@@ -389,3 +389,36 @@ h1 em,h2 em,.from-children em,#inviteTitle em{color:#ad782d}
 .outline-button span{color:#a37a3c}
 .start-over{color:#946b34}
 /* Soft light-mode system bars on mobile */
+
+
+/* RSVP email form — Pearl White & Gold edition */
+.rsvp-intro{font:italic clamp(13px,2.7vw,15px)/1.55 var(--display);color:#796145;margin:0 auto 15px}
+.rsvp-decline-link{display:block;margin:11px auto 0;padding:9px 14px;border:0;background:transparent;color:#8b6b41;text-decoration:underline;text-underline-offset:4px;font-size:12px}
+.rsvp-panel{margin:21px auto 10px;text-align:left;max-width:440px;border:1px solid #d2b17a;border-radius:23px;background:linear-gradient(165deg,#fffefa,#faf1e1);box-shadow:0 12px 32px rgba(130,92,41,.12),inset 0 0 0 5px rgba(219,185,127,.07);padding:clamp(16px,4vw,26px);animation:popIn .4s ease both;color:#533b23}
+.rsvp-panel-header{text-align:center;margin-bottom:18px}
+.rsvp-panel-header h4{font:500 clamp(20px,5vw,26px)/1.22 var(--display);color:#664823;margin:3px auto 6px}
+.rsvp-panel-header p{font:13px/1.55 var(--display);color:#806747;margin:0 auto;max-width:300px}
+.rsvp-flower{color:#be914e;font-size:22px}
+#rsvpForm{display:flex;flex-direction:column;gap:8px}
+#rsvpForm label,#rsvpForm legend{font:650 12px/1.45 var(--sans);color:#604626}
+#rsvpForm small{font:400 11px/1.4 var(--sans);color:#836d51}
+#rsvpForm input:not([type=radio]):not([type=hidden]),#rsvpForm textarea{width:100%;min-height:43px;border:1px solid #cbb083;border-radius:11px;padding:11px 13px;background:rgba(255,255,255,.93);color:#4a3621;font:14px/1.4 var(--sans);outline:none;box-shadow:inset 0 1px 4px rgba(138,96,41,.04);margin-bottom:6px}
+#rsvpForm textarea{resize:vertical;min-height:74px}
+#rsvpForm input:not([type=radio]):focus-visible,#rsvpForm textarea:focus-visible{border-color:#9d7133;box-shadow:0 0 0 3px rgba(196,149,76,.20)}
+#rsvpForm input::placeholder,#rsvpForm textarea::placeholder{color:#b0a08d}
+.rsvp-choice-group{border:0;margin:0 0 4px;padding:0;min-width:0;display:grid;gap:8px}
+.rsvp-choice-group legend{margin-bottom:8px}
+#rsvpForm .rsvp-choice{display:flex;align-items:center;gap:11px;font-size:12px;padding:11px 12px;border:1px solid #dac29b;border-radius:12px;background:#fffaf0;cursor:pointer;line-height:1.4}
+.rsvp-choice input{width:17px;height:17px;accent-color:#b38845;flex:none;margin:0}
+.rsvp-count-row{display:grid;grid-template-columns:1fr 90px;align-items:center;gap:8px;margin:3px 0}
+#rsvpForm .rsvp-count-row input{margin:0;text-align:center}
+.rsvp-submit-actions{display:flex;align-items:center;gap:11px;flex-wrap:wrap;margin-top:4px}
+.rsvp-submit{flex:1;min-height:48px;border:1px solid #ae7f3e;border-radius:30px;background:linear-gradient(145deg,#efd8a8,#cda15c);color:#45311f;font:700 13px var(--sans);box-shadow:0 5px 14px rgba(140,92,34,.13)}
+.rsvp-submit:disabled{opacity:.58;cursor:wait}
+.rsvp-cancel{min-height:45px;padding:10px 13px;border:0;background:transparent;color:#755737;text-decoration:underline;text-underline-offset:3px;font:600 12px var(--sans)}
+.rsvp-status{padding:10px 13px;border-radius:10px;background:#f6edda;color:#664c2c;font-size:12px;line-height:1.5;margin:3px 0}
+.rsvp-status.is-error{background:#fff2e9;color:#8e3f29}
+.rsvp-privacy{text-align:center;color:#927e64;font-size:11px;line-height:1.45;margin:5px 0 0}
+#rsvpForm .rsvp-honey{position:absolute!important;left:-9999px!important;width:1px!important;height:1px!important;opacity:0!important;pointer-events:none!important}
+@media(max-width:420px){.rsvp-panel{margin-left:-3px;margin-right:-3px;padding:15px}.rsvp-submit-actions{flex-wrap:nowrap}.rsvp-cancel{padding:9px 5px}}
+@media(prefers-reduced-motion:reduce){.rsvp-panel{animation:none}}

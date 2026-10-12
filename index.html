@@ -19,9 +19,9 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Great+Vibes&family=Manrope:wght@400;500;600;700&family=Noto+Naskh+Arabic:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css?v=white-gold-1">
+  <link rel="stylesheet" href="style.css?v=white-gold-rsvp-1">
   <title>A Blessed Homecoming | Umrah Dinner Invitation</title>
-  <script src="script.js" defer></script>
+  <script src="script.js?v=white-gold-rsvp-1" defer></script>
 </head>
 <body>
   <div class="site-shell">
@@ -190,8 +190,44 @@
           <div class="paper-bottom-flourish" aria-hidden="true">✧ &nbsp; ♥ &nbsp; ✧</div>
           <p class="from-children">With love,<br><em>From Their Loving Children</em></p>
           <div class="rsvp-area" id="rsvpArea">
-            <button class="rsvp-button" type="button" id="rsvpButton"><span aria-hidden="true">♡</span> Insha’Allah, I’ll Be There! <span aria-hidden="true">✧</span></button>
-            <div class="rsvp-result" id="rsvpResult" role="status" hidden><span aria-hidden="true">✦</span><strong>Alhamdulillah!</strong><span>May Allah bless our time together. We look forward to seeing you, Insha’Allah! 💛</span></div>
+            <p class="rsvp-intro">Will you join us for this special evening?</p>
+            <button class="rsvp-button" type="button" id="rsvpButton" aria-expanded="false" aria-controls="rsvpFormPanel"><span aria-hidden="true">♡</span> Insha’Allah, I’ll Be There! <span aria-hidden="true">✧</span></button>
+            <button class="rsvp-decline-link" type="button" id="rsvpDeclineButton" aria-controls="rsvpFormPanel">Sorry, I can’t make it</button>
+
+            <div class="rsvp-panel" id="rsvpFormPanel" hidden>
+              <div class="rsvp-panel-header">
+                <span class="rsvp-flower" aria-hidden="true">✧</span>
+                <h4 id="rsvpFormTitle">A little note for the family</h4>
+                <p>Let us know who is coming — we'll receive your reply by email.</p>
+              </div>
+              <form id="rsvpForm" action="https://formsubmit.co/ajax/mrwkhurshid3333@gmail.com" method="POST" aria-labelledby="rsvpFormTitle">
+                <input type="hidden" name="_subject" value="Umrah Dinner — New RSVP">
+                <input type="hidden" name="_template" value="table">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="text" name="_honey" class="rsvp-honey" autocomplete="off" tabindex="-1" aria-hidden="true">
+                <input type="hidden" name="event" value="Umrah Homecoming Dinner — October 24, 2026 — Royal Cuisine">
+                <label for="rsvpName">Your name <span aria-hidden="true">*</span></label>
+                <input id="rsvpName" name="guest_name" type="text" required minlength="2" maxlength="90" autocomplete="name" placeholder="Your name or family name">
+                <fieldset class="rsvp-choice-group">
+                  <legend>Your reply</legend>
+                  <label class="rsvp-choice"><input type="radio" name="attendance" value="Attending — Insha'Allah" id="rsvpYes" checked><span>♡ &nbsp; Insha’Allah, we’ll be there</span></label>
+                  <label class="rsvp-choice"><input type="radio" name="attendance" value="Unable to attend" id="rsvpNo"><span>Thank you, but we can’t come</span></label>
+                </fieldset>
+                <div class="rsvp-count-row" id="rsvpCountRow">
+                  <label for="rsvpCount">How many people? <small>(including you)</small></label>
+                  <input id="rsvpCount" name="party_size" type="number" inputmode="numeric" required min="1" max="25" value="1">
+                </div>
+                <label for="rsvpNote">A message for the family <small>(optional)</small></label>
+                <textarea id="rsvpNote" name="guest_message" rows="2" maxlength="300" placeholder="A little dua, greeting, or note…"></textarea>
+                <p class="rsvp-status" id="rsvpStatus" role="status" aria-live="polite" hidden></p>
+                <div class="rsvp-submit-actions">
+                  <button class="rsvp-submit" type="submit" id="rsvpSendButton">Send my reply <span aria-hidden="true">✧</span></button>
+                  <button class="rsvp-cancel" type="button" id="rsvpCancelButton">Cancel</button>
+                </div>
+                <p class="rsvp-privacy">Your reply goes to the hosts by email. No account needed.</p>
+              </form>
+            </div>
+            <div class="rsvp-result" id="rsvpResult" role="status" aria-live="polite" hidden><span aria-hidden="true">✦</span><strong id="rsvpResultTitle">Alhamdulillah!</strong><span id="rsvpResultMessage">Thank you for your reply. We look forward to seeing you, Insha’Allah! 💛</span></div>
           </div>
           <div class="practical-actions">
             <a class="outline-button" id="directionsLink" href="https://www.google.com/maps/search/?api=1&amp;query=259%20Grange%20Rd%20Guelph%20ON" target="_blank" rel="noopener noreferrer"><span aria-hidden="true">⌖</span> Get directions</a>
