@@ -3,8 +3,8 @@
 /* ===============================================================
    EDIT YOUR INVITATION HERE
    Change the time, restaurant or photos later using this section.
-   No server, tracking, attendance list or database is involved.
-   The optional button opens a ready-to-send email. Nothing is sent automatically.
+   No server, emails, tracking, attendance list or database is involved.
+   The button simply shows a celebratory message on this page.
    =============================================================== */
 const INVITATION = {
   day: 'Saturday',
@@ -12,7 +12,6 @@ const INVITATION = {
   time: '6:00 PM',
   venue: 'Royal Cuisine',
   address: '259 Grange Rd, Guelph, ON N1E 6R5',
-  rsvpEmail: 'mrwkhurshid3333@gmail.com',
   gallery: [
     {
       src: 'parents-together-original.jpg',
@@ -24,6 +23,12 @@ const INVITATION = {
       src: 'maliha-kaaba-refined.webp',
       alt: 'Maliha Adil standing before the Kaaba in Makkah',
       caption: 'A moment from the holy city of Makkah',
+      shape: 'portrait'
+    },
+    {
+      src: 'mohammad-muhsen-madinah.jpg',
+      alt: 'Mohammad Muhsen Maulawizada standing at Al-Masjid an-Nabawi in Madinah',
+      caption: 'A blessed moment in Madinah',
       shape: 'portrait'
     }
     // ADD MORE PHOTOS LATER, for example:
@@ -90,14 +95,7 @@ function configureDetails() {
   $('venueName').textContent = INVITATION.venue;
   $('venueAddress').textContent = INVITATION.address;
   $('directionsLink').href = 'https://www.google.com/maps/search/?api=1&query=' + encodeURIComponent(INVITATION.venue + ', ' + INVITATION.address);
-  // Opens the guest's own email app with a prewritten message. No form is submitted.
-  const emailSubject = 'Insha’Allah, I’ll be there — Umrah dinner';
-  const emailBody = `Assalamu Alaikum!
 
-Insha’Allah, I’ll be there for the Umrah homecoming dinner on ${INVITATION.day}, ${INVITATION.date} at ${INVITATION.time}.
-
-Looking forward to celebrating with you!`;
-  $('rsvpButton').href = `mailto:${INVITATION.rsvpEmail}?subject=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 }
 
 function renderGallery() {
@@ -200,12 +198,12 @@ function popSparkles() {
   }
 }
 
-function celebrateEmailIntent() {
-  // Never claim an RSVP was submitted: the guest still has to press Send in their email app.
+function celebrateAttendance() {
+  // Purely decorative confirmation: no email, request, saved response, or RSVP tracking.
   $('rsvpResult').hidden = false;
+  $('rsvpButton').setAttribute('aria-expanded', 'true');
   popSparkles();
-  announce('Your email app should open with a ready-to-send message. Tap Send to share it.');
-  // Preserve normal anchor navigation so mobile browsers can launch the email client.
+  announce('JazakAllah Khair! May Allah bless our time together. We look forward to seeing you, Insha’Allah!');
 }
 
 async function shareInvitation() {
@@ -238,6 +236,7 @@ function resetStory() {
   $('verseCard').classList.remove('is-visible');
   $('gratitudeNext').disabled = true;
   $('rsvpResult').hidden = true;
+  $('rsvpButton').setAttribute('aria-expanded', 'false');
   $('rsvpArea').querySelectorAll('.celebration-spark').forEach(el => el.remove());
   moveGallery(0);
   showScene(0);
@@ -254,7 +253,7 @@ function initialize() {
   $('journeyNext').addEventListener('click', () => showScene(3));
   $('galleryNextScene').addEventListener('click', () => showScene(4));
   $('skipToInvite').addEventListener('click', () => showScene(4));
-  $('rsvpButton').addEventListener('click', celebrateEmailIntent);
+  $('rsvpButton').addEventListener('click', celebrateAttendance);
   $('shareButton').addEventListener('click', shareInvitation);
   $('startOver').addEventListener('click', resetStory);
   $('brandHome').addEventListener('click', event => { event.preventDefault(); resetStory(); });

@@ -390,6 +390,4 @@ h1 em,h2 em,.from-children em,#inviteTitle em{color:#ad782d}
 .start-over{color:#946b34}
 /* Soft light-mode system bars on mobile */
 
-/* The RSVP control is a mailto link styled as a button (not a form submission). */
-a.rsvp-button, a.rsvp-button:visited { text-decoration: none; }
-a.rsvp-button { cursor: pointer; }
+/* The RSVP button only reveals a local celebratory message. */
