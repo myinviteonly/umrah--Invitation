@@ -19,18 +19,19 @@ const INVITATION = {
       caption: 'A precious moment together',
       shape: 'landscape'
     },
+      {
+      src: 'mohammad-muhsen-madinah.jpg',
+      alt: 'Mohammad Muhsen Maulawizada standing at Al-Masjid an-Nabawi in Madinah',
+      caption: 'A blessed moment in Madinah',
+      shape: 'portrait'
+    },
     {
       src: 'maliha-kaaba-refined.webp',
       alt: 'Maliha Adil standing before the Kaaba in Makkah',
       caption: 'A moment from the holy city of Makkah',
       shape: 'portrait'
-    },
-    {
-      src: 'mohammad-muhsen-madinah.jpg',
-      alt: 'Mohammad Muhsen Maulawizada standing at Al-Masjid an-Nabawi in Madinah',
-      caption: 'A blessed moment in Madinah',
-      shape: 'portrait'
     }
+
     // ADD MORE PHOTOS LATER, for example:
     // ,{src:'new-photo.jpg', alt:'Family moment', caption:'Another beautiful memory', shape:'landscape'}
   ]
