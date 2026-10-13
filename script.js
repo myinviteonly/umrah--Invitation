@@ -19,7 +19,7 @@ const INVITATION = {
       caption: 'A precious moment together',
       shape: 'landscape'
     },
-      {
+    {
       src: 'mohammad-muhsen-madinah.jpg',
       alt: 'Mohammad Muhsen Maulawizada standing at Al-Masjid an-Nabawi in Madinah',
       caption: 'A blessed moment in Madinah',
