@@ -209,7 +209,7 @@ function celebrateAttendance() {
 
 async function shareInvitation() {
   const url = window.location.href.split('#')[0];
-  const share = { title: 'A Blessed Homecoming | Umrah Dinner Invitation', text: 'With grateful hearts, we invite you to celebrate with us! ✨', url };
+  const share = { title: 'Welcome Home from Umrah | Umrah Dinner Invitation', text: 'With grateful hearts, we invite you to celebrate with us! ✨', url };
   if (navigator.share) {
     try { await navigator.share(share); return; } catch (error) {
       if (error.name === 'AbortError') return;
